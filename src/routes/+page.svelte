@@ -11,7 +11,7 @@
 			We provide a platform for you to send messages to your friends and family in real-time. Powered by SvelteKit, GCloud pubsub and TailwindCSS to build this project.
 		</p>
 		<div>
-			<p class="text-gray-800 py-3">Try it</p>
+			<p class="text-gray-800 py-3">Try it :</p>
 			<form
 				class="items-center space-y-3 sm:justify-center sm:space-x-3 sm:space-y-0 sm:flex lg:justify-start"
 			>
