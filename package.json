@@ -2,6 +2,7 @@
 	"name": "sdvtopics",
 	"version": "0.0.1",
 	"scripts": {
+		"server": "node server.js",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -11,7 +12,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"docker:build": "docker build -t sdvtopics -f containers/Dockerfile .",
-		"docker:run": "docker run -p 3000:3000 sdvtopics"
+		"docker:run": "docker run -p 3001:3001 sdvtopics"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",

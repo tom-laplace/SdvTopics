@@ -1,19 +1,25 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import { type ViteDevServer } from 'vite';
-
 import { Server } from 'socket.io';
+import type { ViteDevServer } from 'vite';
+import type { message } from './src/types/message.type';
 
 const webSocketServer = {
-	name: 'webSocketServer',
+	name: 'sveltekit-socket-io',
 	configureServer(server: ViteDevServer) {
 		if (!server.httpServer) return;
 
 		const io = new Server(server.httpServer);
 
 		io.on('connection', (socket) => {
-			socket.emit('eventFromServer', 'Hello, World 👋');
+			socket.on('message', (message: message) => {
+				io.emit('message', {
+					...message
+				});
+			});
 		});
+
+		console.log('SocketIO injected');
 	}
 };
 
