@@ -3,6 +3,7 @@ import { defineConfig } from 'vitest/config';
 import { Server } from 'socket.io';
 import type { ViteDevServer } from 'vite';
 import type { message } from './src/types/message.type';
+import { initSubscription } from './pubsub';
 
 const webSocketServer = {
 	name: 'sveltekit-socket-io',
@@ -18,6 +19,8 @@ const webSocketServer = {
 				});
 			});
 		});
+
+		initSubscription(io);
 
 		console.log('SocketIO injected');
 	}

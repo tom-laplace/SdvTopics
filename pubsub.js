@@ -13,7 +13,11 @@ const pubsub = new PubSub({
 const topic = pubsub.topic(topicName);
 const subscription = pubsub.subscription(subscriptionName);
 
-function publishMessage(content: string, username: string) {
+/**
+ * @param {string} content
+ * @param {string} username
+ */
+function publishMessage(content, username) {
 	try {
 		topic.publishMessage({
 			data: Buffer.from(content),
@@ -24,10 +28,17 @@ function publishMessage(content: string, username: string) {
 	}
 }
 
-function initSubscription() {
+/**
+ * @param {any} io
+ */
+function initSubscription(io) {
 	subscription.on('message', (message) => {
-		console.log('Received message:', message.data.toString());
-		process.exit(0);
+		io.emit('message', {
+			content: message.data.toString(),
+			username: message.attributes.username
+		});
+
+		message.ack();
 	});
 }
 

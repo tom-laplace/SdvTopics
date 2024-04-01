@@ -4,12 +4,12 @@
 
 	export let message: string;
 	export let username: string;
-	export let sendMessage: (username: string, message: string) => void;
+	export let publishMessage: (content: string, username: string) => void;
 </script>
 
 <p class="text-gray-500">Enter your username and write a message to start chatting :</p>
 <form
-	on:submit|preventDefault={() => sendMessage(username, message)}
+	on:submit|preventDefault={() => publishMessage(username, message)}
 	class="flex flex-col items-center space-y-3 sm:justify-center sm:space-x-3 sm:space-y-0 sm:flex lg:justify-start"
 >
 	<UsernameInput bind:username />

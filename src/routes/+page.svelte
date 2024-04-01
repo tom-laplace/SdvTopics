@@ -1,11 +1,17 @@
 <script lang="ts">
 	import type { message } from '../types/message.type';
-	import { onMount } from 'svelte';
 	import { io } from 'socket.io-client';
 	import MessageRenderer from '$lib/components/MessageRenderer.svelte';
 	import ChatForm from '$lib/components/ChatForm.svelte';
+	import { onMount } from 'svelte';
+	import { publishMessage } from '../../pubsub';
 
 	const socket = io();
+
+	let message = '';
+	let username = '';
+
+	let messages: message[] = [];
 
 	onMount(() => {
 		socket.on('message', (message: message) => {
@@ -13,20 +19,16 @@
 		});
 	});
 
-	let message = '';
-	let username = '';
-	let messages: message[] = [];
+	// function sendMessage(username: string, message: string) {
+	// 	if (!username || !message) return;
 
-	function sendMessage(username: string, message: string) {
-		if (!username || !message) return;
+	// 	let messageToSend: message = {
+	// 		username,
+	// 		content: message
+	// 	};
 
-		let messageToSend: message = {
-			username,
-			content: message
-		};
-
-		socket.emit('message', messageToSend);
-	}
+	// 	socket.emit('message', messageToSend);
+	// }
 </script>
 
 <section class="mt-24 mx-auto max-w-screen-xl pb-4 px-4 items-center lg:flex md:px-8">
@@ -40,7 +42,7 @@
 			Powered by SvelteKit, GCloud and TailwindCSS.
 		</p>
 		<div>
-			<ChatForm {sendMessage} {username} {message} />
+			<ChatForm {publishMessage} {username} {message} />
 		</div>
 	</div>
 
