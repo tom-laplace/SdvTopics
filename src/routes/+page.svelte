@@ -6,10 +6,6 @@
 	import ChatForm from '$lib/components/ChatForm.svelte';
 
 	const socket = io();
-	const projectId = 'leprojetsubv';
-	const topicName = 'tom';
-	const subscriptionName = 'tom-sub';
-	const keyFileName = 'gcloud/gcloud-conf.json';
 
 	onMount(() => {
 		socket.on('message', (message: message) => {
@@ -41,7 +37,7 @@
 		</h1>
 		<p class="text-gray-500 max-w-xl leading-relaxed sm:mx-auto lg:ml-0">
 			We provide a platform for you to send messages to your friends and family in real-time.
-			Powered by SvelteKit, GCloud pubsub and TailwindCSS to build this project.
+			Powered by SvelteKit, GCloud and TailwindCSS.
 		</p>
 		<div>
 			<ChatForm {sendMessage} {username} {message} />
