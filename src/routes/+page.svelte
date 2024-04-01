@@ -4,7 +4,6 @@
 	import MessageRenderer from '$lib/components/MessageRenderer.svelte';
 	import ChatForm from '$lib/components/ChatForm.svelte';
 	import { onMount } from 'svelte';
-	import { publishMessage } from '../../pubsub';
 
 	const socket = io();
 
@@ -19,16 +18,16 @@
 		});
 	});
 
-	// function sendMessage(username: string, message: string) {
-	// 	if (!username || !message) return;
+	function publishMessage(content: string, username: string) {
+		if (!username || !content) return;
 
-	// 	let messageToSend: message = {
-	// 		username,
-	// 		content: message
-	// 	};
+		let messageToSend: message = {
+			content,
+			username
+		};
 
-	// 	socket.emit('message', messageToSend);
-	// }
+		socket.emit('message', messageToSend);
+	}
 </script>
 
 <section class="mt-24 mx-auto max-w-screen-xl pb-4 px-4 items-center lg:flex md:px-8">

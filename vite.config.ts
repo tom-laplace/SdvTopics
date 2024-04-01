@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 import { Server } from 'socket.io';
 import type { ViteDevServer } from 'vite';
 import type { message } from './src/types/message.type';
-import { initSubscription } from './pubsub';
+import { initSubscription, publishMessage } from './pubsub';
 
 const webSocketServer = {
 	name: 'sveltekit-socket-io',
@@ -14,9 +14,7 @@ const webSocketServer = {
 
 		io.on('connection', (socket) => {
 			socket.on('message', (message: message) => {
-				io.emit('message', {
-					...message
-				});
+				publishMessage(message.content, message.username);
 			});
 		});
 
